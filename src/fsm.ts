@@ -26,22 +26,18 @@ export class FSM {
     this.currentState = "q0";
 
     for (let symbol of input) {
-      console.log("symbol:", symbol);
       if (!this.alphabet.has(symbol)) {
-        console.log("doesnt have symbol");
         return false;
       }
 
       const nextState = this.transitions.get(this.currentState)?.get(symbol);
       if (!nextState) {
-        console.log("not next state");
         return false;
       }
 
       this.currentState = nextState;
     }
 
-    console.log("returning ", this.currentState);
     return this.finalStates.has(this.currentState);
   }
 }
