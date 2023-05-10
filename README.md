@@ -30,6 +30,15 @@ onde n é par e m + p é ímpar
 
 ![Alt text](/fsm-full.png "Optional Title")
 
+### Arquivos relevantes
+
+- [src/fsm.ts](/src/fsm.ts)
+  - classe representando um autômato finito determinístico, utilizada para reconhecer as sentenças.
+- [src/utils.ts](/src/utils.ts)
+  - possui métodos auxiliares
+    - `parseTokens` - processa a entrada do usuário e separa em grupos (ou tokens)
+    - `validateTokens` - processa os tokens e verifica se a sentença é válida, inválida, verifica os símbolos e operadores
+
 ### Acessando a aplicação
 
 Não é necessário buildar a aplicação localmente, o sistema está hospedado na URL: https://example.com.
