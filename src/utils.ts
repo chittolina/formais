@@ -1,3 +1,5 @@
+import { FSM } from "./fsm";
+
 export interface Token {
   content: string;
   result: string;
@@ -8,26 +10,13 @@ export const DELIMITERS = ["\n", "\t", " "];
 export const OPERATORS = ["*", "+", "/", "-"];
 export const SYMBOLS = ["a", "b", "c", "d", "e"];
 
-export function parse(input: string): Token[] {
+// Realiza o parse da entrada do usuário em tokens
+export function parseTokens(input: string): Token[] {
   let tokens: Token[][] = [];
   let currentSentence = "";
 
-  /* 
-    sentence = ''
-
-    case 1:
-      current char is operator
-        add to tokens with operator type
-        add to tokens current sentence
-      current char is not operator
-        add it to the current sentence
-    case 2:
-      end of string
-        add to tokens current sentence
-  */
-
-  // split string based on the delimiters
-  // ie, "abc d \n 3" -> ["abc", "d", "3"]
+  // Corta a string baseado nos delimitadores
+  // Exemplo: "abc d \n 3" -> ["abc", "d", "3"]
   const groups = input.split(/\s|\t|\n/);
 
   for (let i = 0; i < groups.length; i++) {
@@ -79,4 +68,37 @@ export function parse(input: string): Token[] {
       return previousValue;
     })
     .filter((token) => token.content !== "");
+}
+
+// Valida se os tokens são reconhecidos pelo FSM, ou inválidos, ou se são operadores aritméticos
+export function validateTokens(tokens: Token[], fsm: FSM): Token[] {
+  const newTokens = [];
+
+  for (let i = 0; i < tokens.length; i++) {
+    if (tokens[i].type === "operator") {
+      newTokens.push({ ...tokens[i], result: "operador aritmético" });
+    }
+
+    if (tokens[i].type === "sentence") {
+      const hasInvalidSymbol = tokens[i].content
+        .split("")
+        .some((symbol) => !SYMBOLS.includes(symbol));
+
+      if (hasInvalidSymbol) {
+        newTokens.push({
+          ...tokens[i],
+          result: "ERRO: símbolo(s) inválido(s)",
+        });
+      } else {
+        newTokens.push({
+          ...tokens[i],
+          result: fsm.run(tokens[i].content)
+            ? "sentença válida"
+            : "ERRO: sentença inválida",
+        });
+      }
+    }
+  }
+
+  return newTokens;
 }

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import { Box, Button, Container, Textarea, Heading } from "@chakra-ui/react";
-import { SYMBOLS, Token, parse } from "./parser";
-import { fsm } from "./fsm";
+import { SYMBOLS, Token, parseTokens, validateTokens } from "./utils";
+import { fsm } from "./languageFsm";
 
 function App() {
   const [input, setInput] = useState("");
@@ -11,14 +11,16 @@ function App() {
 
   // Cria os tokens baseado no que o usuário digitou
   const tokenize = () => {
-    const tokens = parse(input);
+    const tokens = parseTokens(input);
     setTokens(tokens);
+    updateResults(validateTokens(tokens, fsm));
   };
 
   // Limpa os dados na tela
   const clear = () => {
     setTokens([]);
     setInput("");
+    setResults("");
   };
 
   // Atualiza os resultados para cada token encontrado
@@ -32,40 +34,8 @@ function App() {
     setResults(str);
   };
 
-  useEffect(() => {
-    const newTokens = [];
-
-    for (let i = 0; i < tokens.length; i++) {
-      if (tokens[i].type === "operator") {
-        newTokens.push({ ...tokens[i], result: "operador aritmético" });
-      }
-
-      if (tokens[i].type === "sentence") {
-        const hasInvalidSymbol = tokens[i].content
-          .split("")
-          .some((symbol) => !SYMBOLS.includes(symbol));
-
-        if (hasInvalidSymbol) {
-          newTokens.push({
-            ...tokens[i],
-            result: "ERRO: símbolo(s) inválido(s)",
-          });
-        } else {
-          newTokens.push({
-            ...tokens[i],
-            result: fsm.run(tokens[i].content)
-              ? "sentença válida"
-              : "ERRO: sentença inválida",
-          });
-        }
-      }
-    }
-
-    updateResults(newTokens);
-  }, [tokens]);
-
   return (
-    <div className="test">
+    <div className="bg">
       <Container
         display="flex"
         justifyContent="center"
