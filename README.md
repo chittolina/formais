@@ -8,7 +8,9 @@ Implementação de uma interface web que reconheça a linguagem definida por:
 onde n é par e m + p é ímpar
 ```
 
-### Autômato finito mínimo
+### Autômato finito
+
+#### Tabela de transição
 
 |     | a   | b   | c   | d   | e   |
 | --- | --- | --- | --- | --- | --- |
@@ -23,6 +25,8 @@ onde n é par e m + p é ímpar
 | q8  | -   | -   | -   | q9  | -   |
 | q9  | -   | -   | -   | -   | q10 |
 | q10 | -   | -   | -   | q7  | -   |
+
+#### Diagrama de transição
 
 ![Alt text](/fsm-full.png "Optional Title")
 
