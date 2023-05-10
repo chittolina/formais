@@ -41,7 +41,7 @@ onde n é par e m + p é ímpar
 
 ### Acessando a aplicação
 
-Não é necessário buildar a aplicação localmente, o sistema está hospedado na URL: https://example.com.
+Não é necessário buildar a aplicação localmente, você pode acessar a aplicação acessando [aqui](https://formais-cel2zft2s-chittolina.vercel.app/).
 Você pode apenas acessar esse link e utilizá-lo para realizar testes.
 
 ### Executando a aplicação localmente (opcional)
