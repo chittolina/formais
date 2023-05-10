@@ -24,7 +24,7 @@ onde n é par e m + p é ímpar
 | q9  | -   | -   | -   | -   | q10 |
 | q10 | -   | -   | -   | q7  | -   |
 
-![Alt text](/full-fsm "Optional Title")
+![Alt text](/fsm-full.png "Optional Title")
 
 ### Acessando a aplicação
 
