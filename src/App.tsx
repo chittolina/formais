@@ -1,24 +1,21 @@
 import { useState } from "react";
 import "./App.css";
 import { Box, Button, Container, Textarea, Heading } from "@chakra-ui/react";
-import { SYMBOLS, Token, parseTokens, validateTokens } from "./utils";
+import { Token, parseTokens, validateTokens } from "./utils";
 import { fsm } from "./languageFsm";
 
 function App() {
   const [input, setInput] = useState("");
-  const [tokens, setTokens] = useState<Token[]>([]);
   const [results, setResults] = useState("");
 
   // Cria os tokens baseado no que o usuário digitou
   const tokenize = () => {
     const tokens = parseTokens(input);
-    setTokens(tokens);
     updateResults(validateTokens(tokens, fsm));
   };
 
   // Limpa os dados na tela
   const clear = () => {
-    setTokens([]);
     setInput("");
     setResults("");
   };
