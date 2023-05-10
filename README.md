@@ -8,6 +8,8 @@ Implementação de uma interface web que reconheça a linguagem definida por:
 onde n é par e m + p é ímpar
 ```
 
+![Alt text](/preview.png "Preview")
+
 ### Autômato finito
 
 #### Tabela de transição
@@ -28,7 +30,7 @@ onde n é par e m + p é ímpar
 
 #### Diagrama de transição
 
-![Alt text](/fsm-full.png "Optional Title")
+![Alt text](/fsm-full.png "Full FSM")
 
 ### Arquivos relevantes
 
@@ -41,7 +43,7 @@ onde n é par e m + p é ímpar
 
 ### Acessando a aplicação
 
-Não é necessário buildar a aplicação localmente, você pode acessar a aplicação acessando [aqui](https://formais-cel2zft2s-chittolina.vercel.app/).
+Não é necessário buildar a aplicação localmente, você pode acessar a aplicação acessando [aqui](https://formais.vercel.app).
 Você pode apenas acessar esse link e utilizá-lo para realizar testes.
 
 ### Executando a aplicação localmente (opcional)
