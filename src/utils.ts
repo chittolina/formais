@@ -29,14 +29,14 @@ export function parseTokens(input: string): Token[] {
       // when an operator is found
       if (OPERATORS.includes(currentChar)) {
         groupTokens.push({
-          content: currentChar,
-          type: "operator",
+          content: currentSentence,
+          type: "sentence",
           result: "",
         });
 
         groupTokens.push({
-          content: currentSentence,
-          type: "sentence",
+          content: currentChar,
+          type: "operator",
           result: "",
         });
 
@@ -80,9 +80,7 @@ export function validateTokens(tokens: Token[], fsm: FSM): Token[] {
     }
 
     if (tokens[i].type === "sentence") {
-      const hasInvalidSymbol = tokens[i].content
-        .split("")
-        .some((symbol) => !SYMBOLS.includes(symbol));
+      const hasInvalidSymbol = !SYMBOLS.includes(tokens[i].content[0]);
 
       if (hasInvalidSymbol) {
         newTokens.push({
